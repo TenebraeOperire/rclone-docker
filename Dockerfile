@@ -14,7 +14,7 @@ RUN apk update
 RUN apk add --no-cache ca-certificates
 
 # install build packages
-RUN apk add --no-cache --virtual=build-dependencies wget curl unzip
+RUN apk add --no-cache --virtual=build-dependencies wget curl unzip nano
 
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" \
 	| awk '/tag_name/{print $4;exit}' FS='[""]')
@@ -37,12 +37,12 @@ RUN rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 # create abc user
 RUN groupmod -g 1000 users
-RUN	useradd -u 911 -U -d /config -s /bin/false abc
-RUN	usermod -G users abc
+RUN useradd -u 911 -U -d /config -s /bin/false abc
+RUN usermod -G users abc
 
 # create some files / folders
-RUN mkdir -p /config /app /defaults /data
-RUN	touch /var/lock/rclone.lock
+RUN mkdir -p /config /data
+RUN touch /var/lock/rclone.lock
 
 # add local files
 COPY root/ /

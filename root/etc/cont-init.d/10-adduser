@@ -13,8 +13,5 @@ User uid:    $(id -u abc)
 User gid:    $(id -g abc)
 -------------------------------------
 "
-chown abc:abc \
-	/app \
-	/config \
-	/defaults \
-	/var/lock/rclone.lock
+
+chown abc:abc /config /var/lock/rclone.lock
