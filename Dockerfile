@@ -14,7 +14,7 @@ RUN apk update
 RUN apk add --no-cache ca-certificates
 
 # install build packages
-RUN apk add --no-cache --virtual=build-dependencies wget curl unzip nano
+RUN apk add --no-cache --virtual=build-dependencies wget curl unzip tar nano
 
 RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" \
 	| awk '/tag_name/{print $4;exit}' FS='[""]')
