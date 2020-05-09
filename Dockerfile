@@ -3,7 +3,6 @@ MAINTAINER TenebraeOperire
 
 # global environment settings
 ENV PLATFORM_ARCH="amd64"
-ARG RCLONE_VERSION="current"
 
 # s6 environment settings
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
@@ -21,8 +20,8 @@ RUN curl -o /tmp/s6-overlay.tar.gz -L \
 RUN tar xfz /tmp/s6-overlay.tar.gz -C /
 
 RUN cd tmp
-RUN wget -q https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-${PLATFORM_ARCH}.zip
-RUN unzip /tmp/rclone-v${RCLONE_VERSION}-linux-${PLATFORM_ARCH}.zip
+RUN wget -q https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip
+RUN unzip /tmp/rclone-current-linux-${PLATFORM_ARCH}.zip
 RUN mv /tmp/rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community shadow
