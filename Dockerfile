@@ -20,7 +20,8 @@ RUN curl -o /tmp/s6-overlay.tar.gz -L \
 RUN tar xfz /tmp/s6-overlay.tar.gz -C /
 
 RUN cd tmp
-RUN wget -q https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip
+RUN wget https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip
+RUN ls
 RUN unzip /tmp/rclone-current-linux-${PLATFORM_ARCH}.zip
 RUN mv /tmp/rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin
 
