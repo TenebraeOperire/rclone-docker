@@ -35,7 +35,9 @@ Another docker for [rclone][appurl] -- aka "rsync for cloud storage" -- a comman
 ## Usage
 
 The docker expects a file named rclone_cron to exist in container path /config
+
 On startup, cron schedules from this file are activated within the container
+
 Example cron to run a sync from /data to remote:path at 3am every day:
 ```
 0 3 * * * rclone sync --config=/config/rclone.conf /data remote:path
