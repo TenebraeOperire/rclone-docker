@@ -13,7 +13,7 @@ RUN apk update
 RUN apk add --no-cache ca-certificates
 
 # install build packages
-RUN apk add --no-cache --virtual=build-dependencies wget curl unzip nano
+RUN apk add --no-cache --virtual=build-dependencies wget curl unzip
 
 RUN curl -o /tmp/s6-overlay.tar.gz -L \
 	"https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${PLATFORM_ARCH}.tar.gz"
@@ -37,6 +37,7 @@ RUN useradd -u 911 -U -d /config -s /bin/false abc
 RUN usermod -G users abc
 
 # create some files / folders
+RUN apk add nano
 RUN mkdir -p /config /data
 RUN touch /var/lock/rclone.lock
 
