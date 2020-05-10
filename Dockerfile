@@ -19,10 +19,10 @@ RUN curl -o /tmp/s6-overlay.tar.gz -L \
 	"https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${PLATFORM_ARCH}.tar.gz"
 RUN tar xfz /tmp/s6-overlay.tar.gz -C /
 
-RUN cd tmp
-RUN wget -q https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip
-RUN unzip rclone-current-linux-${PLATFORM_ARCH}.zip
-RUN mv /rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin
+RUN curl -o /tmp/rclone.zip -L \
+    "https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip"
+RUN unzip /tmp/rclone.zip
+RUN mv /tmp/rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community shadow
 
