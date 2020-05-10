@@ -10,7 +10,7 @@ ENV S6_KEEP_ENV=1
 
 # install packages
 RUN apk update
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates nano
 
 # install build packages
 RUN apk add --no-cache --virtual=build-dependencies wget curl unzip
