@@ -37,7 +37,6 @@ RUN useradd -u 911 -U -d /config -s /bin/false abc
 RUN usermod -G users abc
 
 # create some files / folders
-RUN apk add nano
 RUN mkdir -p /config /data
 RUN touch /var/lock/rclone.lock
 
