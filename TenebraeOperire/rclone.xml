@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>rclone</Name>
+  <Repository>ventussaltare/rclone:latest</Repository>
+  <Registry>https://hub.docker.com/r/ventussaltare/rclone</Registry>
+  <Network>bridge</Network>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/TenebraeOperire/rclone-docker</Support>
+  <Overview>rclone ("rsync for cloud storage") is a command line program to sync files and directories to and from different cloud storage providers.
+    [br][br]
+    The docker expects a file named rclone_cron to exist in container path /config[br]
+    On startup, cron schedules from this file are activated within the container[br]
+    Example cron to run a sync from /data to remote:path at 3am every day:[br]
+    0 3 * * * rclone sync --config=/config/rclone.conf /data remote:path
+  </Overview>
+  <WebUI/>
+  <Banner>https://raw.githubusercontent.com/rclone/rclone/master/graphics/logo/favicon/favicon_32px.png</Banner>
+  <Icon>https://raw.githubusercontent.com/rclone/rclone/master/graphics/logo/favicon/favicon_32px.png</Icon>
+  <ExtraParams/>
+  <Description>rclone ("rsync for cloud storage") is a command line program to sync files and directories to and from different cloud storage providers.
+    [br][br]&#xD;
+    [b][u][span style='color: #E80000;']Configuration[/span][/u][/b][br]
+    [b]/config[/b] The path to rclone.conf and rclone_cron files[br]
+    [b]/data[/b] The path to the data that rclone will back up[br]
+  </Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish/>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir/>
+      <ContainerDir>/config</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir/>
+      <ContainerDir>/data</ContainerDir>
+      <Mode>ro</Mode>
+    </Volume>
+  </Data>
+  <Config Name="Config path" Target="/config" Default="/mnt/cache/appdata/rclone" Mode="rw" Description="The path to rclone.conf and rclone_cron files" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Config Name="Data path" Target="/data" Default="" Mode="ro" Description="The path to the data that rclone will back up" Type="Path" Display="always" Required="true" Mask="false"/>
+  <Beta>True</Beta>
+  <Category>Backup: Cloud:</Category>
+  <Date>2020.05.10</Date> 
+  <Changes>
+    [b]2020.05.10[/b] 
+        * Initial beta version
+  </Changes>
+  <Project>http://rclone.org/</Project>
+  <BaseImage>alpine</BaseImage>
+</Container>

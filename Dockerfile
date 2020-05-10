@@ -3,7 +3,6 @@ MAINTAINER TenebraeOperire
 
 # global environment settings
 ENV PLATFORM_ARCH="amd64"
-ARG RCLONE_VERSION="current"
 
 # s6 environment settings
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
@@ -11,21 +10,18 @@ ENV S6_KEEP_ENV=1
 
 # install packages
 RUN apk update
-RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache ca-certificates nano
 
 # install build packages
-RUN apk add --no-cache --virtual=build-dependencies wget curl unzip gzip tar nano
-
-RUN OVERLAY_VERSION=$(curl -sX GET "https://api.github.com/repos/just-containers/s6-overlay/releases/latest" \
-	| awk '/tag_name/{print $4;exit}' FS='[""]')
+RUN apk add --no-cache --virtual=build-dependencies wget curl unzip
 
 RUN curl -o /tmp/s6-overlay.tar.gz -L \
-	"https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${PLATFORM_ARCH}.tar.gz"
+	"https://github.com/just-containers/s6-overlay/releases/latest/download/s6-overlay-${PLATFORM_ARCH}.tar.gz"
 RUN tar xfz /tmp/s6-overlay.tar.gz -C /
 
-RUN cd tmp
-RUN wget -q https://downloads.rclone.org/v${RCLONE_VERSION}/rclone-v${RCLONE_VERSION}-linux-${PLATFORM_ARCH}.zip
-RUN unzip /tmp/rclone-v${RCLONE_VERSION}-linux-${PLATFORM_ARCH}.zip
+RUN curl -o /tmp/rclone.zip -L \
+    "https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip"
+RUN unzip /tmp/rclone.zip -d /tmp
 RUN mv /tmp/rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin
 
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community shadow

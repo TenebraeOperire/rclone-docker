@@ -1,6 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 # set crontab
+cat /config/rclone_cron && echo ""
 crontab -u abc /config/rclone_cron
 
 # create empty config file
