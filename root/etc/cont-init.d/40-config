@@ -1,5 +1,7 @@
 #!/usr/bin/with-contenv sh
 
+rclone --version
+
 # set crontab
 cat /config/rclone_cron && echo ""
 crontab -u abc /config/rclone_cron
@@ -10,3 +12,4 @@ touch /config/rclone.conf
 # permissions
 chown abc:abc /config/rclone.conf
 chmod 777 /var/lock
+
