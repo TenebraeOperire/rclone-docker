@@ -53,7 +53,7 @@ Example cron to run a sync from /data to remote:path at 3am every day:
 
 ## Versions
 
-+ **2020.05.10**
++ **2020.05.30**
   * Unraid template included
   * Update readme
   * Misc improvements
