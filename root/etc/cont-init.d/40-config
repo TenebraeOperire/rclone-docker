@@ -2,9 +2,12 @@
 
 rclone --version
 
+# convert crlf
+tr -d '\r' < /config/rclone_cron > /tmp/rclone_cron
+
 # set crontab
-cat /config/rclone_cron && echo ""
-crontab -u abc /config/rclone_cron
+cat /tmp/rclone_cron && echo ""
+crontab -u abc /tmp/rclone_cron
 
 # create empty config file
 touch /config/rclone.conf
