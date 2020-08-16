@@ -8,6 +8,9 @@ ENV PLATFORM_ARCH="amd64"
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 ENV S6_KEEP_ENV=1
 
+# override default config location
+ENV RCLONE_CONFIG=/config/rclone.conf
+
 # install packages
 RUN apk update && apk add --no-cache ca-certificates nano
 
