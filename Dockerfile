@@ -10,7 +10,8 @@ ENV S6_KEEP_ENV=1
 
 # install packages
 RUN apk update && apk add --no-cache ca-certificates nano && \
-    apk add --no-cache --virtual=build-dependencies wget curl unzip
+    apk add --no-cache --virtual=build-dependencies wget curl unzip && \
+    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community shadow
 
 # rclone and s6 overlay
 RUN curl -o /tmp/s6-overlay.tar.gz -L \
@@ -20,7 +21,6 @@ RUN curl -o /tmp/s6-overlay.tar.gz -L \
     "https://downloads.rclone.org/rclone-current-linux-${PLATFORM_ARCH}.zip" && \
     unzip /tmp/rclone.zip -d /tmp && \
     mv /tmp/rclone-*-linux-${PLATFORM_ARCH}/rclone /usr/bin && \
-    apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community shadow && \
     unset RCLONE_VERSION && \
     apk del --purge build-dependencies && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
@@ -28,10 +28,8 @@ RUN curl -o /tmp/s6-overlay.tar.gz -L \
 # create abc user
 RUN groupmod -g 1000 users && \
     useradd -u 911 -U -d /config -s /bin/false abc && \
-    usermod -G users abc
-
-# create some files / folders
-RUN mkdir -p /config /data && \
+    usermod -G users abc && \
+    mkdir -p /config /data && \
     touch /var/lock/rclone.lock
 
 # add local files
