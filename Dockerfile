@@ -12,7 +12,7 @@ ENV S6_KEEP_ENV=1
 ENV RCLONE_CONFIG=/config/rclone.conf
 
 # install packages
-RUN apk update && apk add --no-cache ca-certificates nano
+RUN apk update --no-cache && apk add --no-cache ca-certificates nano
 
 # rclone and s6 overlay etc
 RUN apk add --no-cache --virtual=build-dependencies wget curl unzip && \
