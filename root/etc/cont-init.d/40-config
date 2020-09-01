@@ -15,4 +15,3 @@ touch /config/rclone.conf
 # permissions
 chown abc:abc /config/rclone.conf
 chmod 777 /var/lock
-
